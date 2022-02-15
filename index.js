@@ -1,3 +1,119 @@
+const userScore = 0;
+const compScore = 0;
+
+let userScore_span = document.getElementById('user-score');
+let compScore_span = document.getElementById('comp-score');
+
+const scoredBoard_div = document.querySelector('.score-board');
+const result_div = document.querySelector('.result');
+const rock_div = document.getElementById('rock');
+const paper_div = document.getElementById('paper');
+const scissors_div = document.getElementById('scissors');
+
+
+function getComputerChoice()
+{
+    const options = ["r", "s", "p"];
+    const random = Math.floor(Math.random() * 3);
+    const option = options[random];
+    return option;
+}
+
+//console.log(getComputerChoice());
+
+function game(userChoice)
+{
+    //console.log("You chose: " + userChoice);
+    const computerChoice = getComputerChoice();
+    //console.log(`User choice =>  ${userChoice}`);
+    //console.log(`Computer choice => ${computerChoice}`);  
+    switch(userChoice + computerChoice)
+    {
+        case "pr":
+            console.log("You Win: Paper covers rock");
+            break;
+        case "rs":
+            console.log("You win: Rock crushes scissors");
+            break;
+        case "sp":
+            console.log("You win: Scissors cut paper");
+            break;
+        case "rp":
+            console.log("You lose: Paper covers rock");
+            break;
+        case "sr":
+            console.log("You lose: Rock crushes scissors");
+            break;
+        case "ps":
+            console.log("You lose: Scissors cut paper");
+            break;
+        case "pp":
+        case "rr":
+        case "ss":
+            console.log("It's a tie");
+            break;
+    }
+        
+}
+
+//game("c");
+game();
+
+function main() 
+{
+    rock_div.addEventListener('click',()=> game("r"));
+    paper_div.addEventListener('click',()=> game("p"));
+    scissors_div.addEventListener('click',()=> game("s"));
+}
+main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 //Global variables to determine the winner
 let playerScore = 0;
