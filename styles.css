@@ -86,3 +86,18 @@ body{
     font-weight: bold;
     color: white;
 }
+
+.green-glow {
+    border: 4px solid lightgreen;
+    box-shadow: 0 0 10px darkgreen;
+}
+
+.red-glow {
+    border: 4px solid lightcoral;
+    box-shadow: 0 0 10px darkred;
+}
+
+.grey-glow {
+    border: 4px solid lightgrey;
+    box-shadow: 0 0 10px darkslategrey;
+}

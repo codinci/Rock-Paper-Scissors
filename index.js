@@ -5,9 +5,9 @@ const userScore_span = document.getElementById('user-score');
 const compScore_span = document.getElementById('comp-score');
 const scoredBoard_div = document.querySelector('.score-board');
 const result_div = document.querySelector('.result > p');
-const rock_div = document.getElementById('rock');
-const paper_div = document.getElementById('paper');
-const scissors_div = document.getElementById('scissors');
+const rock_div = document.getElementById('r');
+const paper_div = document.getElementById('p');
+const scissors_div = document.getElementById('s');
 
 
 function getComputerChoice()
@@ -27,6 +27,13 @@ function convertToWord(letter)
             :"Scissors");
 }
 
+function convertToLetter(word)
+{
+    return (word == 'rock'? "r"
+            :word == 'paper' ? "p"
+            :"s");
+}
+
 function win(userChoice,computerChoice)
 {
     userScore++;
@@ -42,9 +49,15 @@ function win(userChoice,computerChoice)
         //console.log(`You win: Scissors cut paper`);
     }
     
+    document.getElementById(userChoice).classList.add('green-glow');
+    setTimeout(function (){document.getElementById(userChoice).classList.remove('green-glow')}, 3000);
+
     //console.log("User Wins");
     //console.log(userScore);
 }
+
+setTimeout(function (){console.log("hello")}, 10000);
+
 
 function lose(userChoice,computerChoice)
 {
@@ -61,12 +74,18 @@ function lose(userChoice,computerChoice)
         //console.log(`You lose: Scissors cut paper`);
     }
 
+    document.getElementById(userChoice).classList.add('red-glow');
+    setTimeout(function (){document.getElementById(userChoice).classList.remove('red-glow')}, 3000);
+
     //console.log("User loses");
 }
 
-function draw(computerChoice)
+function draw(userChoice)
 {
-    result_div.innerHTML = `You both chose: ${convertToWord(computerChoice)}.Its a tie.`;
+    result_div.innerHTML = `You both chose: ${convertToWord(userChoice)}.Its a tie.`;
+
+    document.getElementById(userChoice).classList.add('grey-glow');
+    setTimeout(function (){document.getElementById(userChoice).classList.remove('grey-glow')}, 3000);
     //console.log("It's a tie");
 }
 
@@ -98,7 +117,7 @@ function game(userChoice)
         case "rr":
         case "ss":
             //console.log("It's a tie");
-            draw(computerChoice);
+            draw(userChoice);
             break;
     }
         
