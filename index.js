@@ -1,5 +1,7 @@
 let userScore = 0;
 let compScore = 0;
+let finalScore = 0;
+
 
 const userScore_span = document.getElementById('user-score');
 const compScore_span = document.getElementById('comp-score');
@@ -8,7 +10,17 @@ const result_div = document.querySelector('.result > p');
 const rock_div = document.getElementById('r');
 const paper_div = document.getElementById('p');
 const scissors_div = document.getElementById('s');
+const modal = document.getElementById('myModal');
+const endGameMessage = document.querySelector('.message');
 
+
+function main() {
+    rock_div.addEventListener('click',()=> game("r"));
+    paper_div.addEventListener('click',()=> game("p"));
+    scissors_div.addEventListener('click',()=> game("s"));
+}
+
+main();
 
 function getComputerChoice()
 {
@@ -36,8 +48,6 @@ function convertToLetter(word)
 
 function win(userChoice, computerChoice)
 {
-    userScore++;
-    userScore_span.textContent = userScore;
     const userChoice_div = document.getElementById(userChoice);
 
     if(userChoice == 'r' && computerChoice == 's'){
@@ -58,13 +68,10 @@ function win(userChoice, computerChoice)
 }
 
 
-
 // setTimeout(function (){console.log("hello")}, 10000);
 
 function lose(userChoice, computerChoice)
 {
-    compScore++;
-    compScore_span.textContent = compScore;
     const userChoice_div = document.getElementById(userChoice);
 
     if(userChoice == 's' && computerChoice == 'r'){
@@ -97,6 +104,8 @@ function draw(userChoice)
 
 function game(userChoice)
 {
+    console.log(finalScore);
+    if (finalScore == 5) return openModal(userScore, compScore);
     //console.log("You chose: " + userChoice);
     const computerChoice = getComputerChoice();
     //console.log(`User choice =>  ${userChoice}`);
@@ -110,6 +119,8 @@ function game(userChoice)
         case "sp":
             //console.log("You win: Scissors cut paper");
             win(userChoice, computerChoice);
+            userScore++;
+            userScore_span.textContent = userScore;
             break;
         case "rp":
             //console.log("You lose: Paper covers rock");
@@ -118,6 +129,8 @@ function game(userChoice)
         case "ps":
             //console.log("You lose: Scissors cut paper");
             lose(userChoice, computerChoice);
+            compScore++;
+            compScore_span.textContent = compScore;
             break;
         case "pp":
         case "rr":
@@ -126,29 +139,25 @@ function game(userChoice)
             draw(userChoice);
             break;
     }
-}
-//game("c");
-
-function main()
-{
-    rock_div.addEventListener('click',()=> game("r"));
-    paper_div.addEventListener('click',()=> game("p"));
-    scissors_div.addEventListener('click',()=> game("s"));
+    finalScore = userScore + compScore;
+    console.log(finalScore);
 }
 
-main();
+function openModal(uScore, cScore){
+    modal.style.display = 'block';
+    result_div.textContent = 'Game Over';
+    if(uScore > cScore){
+        endGameMessage.textContent = 'Congratulations You Won!!';
+    } else {
+        endGameMessage.textContent = 'Sorry you lost ...';
+    }
+}
 
-// function ultimateWinner(){
-//     let user = userScore_span.textContent;
-//     let finalScore = userScore + compScore;
-//     // console.log(userScore_span.textContent);
-//     if(finalScore !==5) {
-//         main();
-//     } else if(userScore > compScore) {
-//         result_div.textContent = 'Congratulations You Won!!';
-//     } else {
-//         result_div.textContent = 'Sorry You Lost to the Computer';
-//     }
-// }
+  // When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
-// ultimateWinner();
+
