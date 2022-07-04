@@ -1,7 +1,5 @@
 let userScore = 0;
 let compScore = 0;
-// let finalScore = 0;
-
 
 const userScore_span = document.getElementById('user-score');
 const compScore_span = document.getElementById('comp-score');
@@ -31,8 +29,6 @@ function getComputerChoice()
     return option;
 }
 
-//console.log(getComputerChoice());
-
 function convertToWord(letter)
 {
     return (letter == 'r'? "Rock"
@@ -53,23 +49,16 @@ function win(userChoice, computerChoice)
 
     if(userChoice == 'r' && computerChoice == 's'){
         result_div.textContent = `${convertToWord(userChoice)} crashes ${convertToWord(computerChoice)}. You Win!!`;
-        //console.log(`You win: Rock crashes paper`);
     }else if(userChoice == 'p' && computerChoice == 'r'){
         result_div.textContent = `${convertToWord(userChoice)} covers ${convertToWord(computerChoice)}. You Win!!`;
-        //console.log(`You win: Paper covers rock`);
     }else {
         result_div.textContent = `${convertToWord(userChoice)} cut ${convertToWord(computerChoice)}. You Win!!`;
-        //console.log(`You win: Scissors cut paper`);
     }
 
     userChoice_div.classList.add('green-glow');
     setTimeout(() => userChoice_div.classList.remove('green-glow'), 1000);
-
-    //console.log("User Wins");
 }
 
-
-// setTimeout(function (){console.log("hello")}, 10000);
 
 function lose(userChoice, computerChoice)
 {
@@ -77,19 +66,14 @@ function lose(userChoice, computerChoice)
 
     if(userChoice == 's' && computerChoice == 'r'){
         result_div.textContent = `${convertToWord(computerChoice)} crashes ${convertToWord(userChoice)}. Sorry you Lost!!`;
-        //console.log(`You lose: Rock crashes scissors`);
     }else if(userChoice == 'r' && computerChoice == 'p'){
         result_div.textContent = `${convertToWord(computerChoice)} covers ${convertToWord(userChoice)}. Sorry you Lost!!`;
-        //console.log(`You lose: Paper covers rock`);
     }else {
         result_div.textContent = `${convertToWord(computerChoice)} cuts ${convertToWord(userChoice)}. Sorry you Lost!!`;
-        //console.log(`You lose: Scissors cut paper`);
     }
 
     userChoice_div.classList.add('red-glow');
     setTimeout(() => userChoice_div.classList.remove('red-glow'), 1000);
-
-    //console.log("User loses");
 }
 
 function draw(userChoice)
@@ -100,34 +84,24 @@ function draw(userChoice)
 
     userChoice_div.classList.add('grey-glow');
     setTimeout(() => userChoice_div.classList.remove('grey-glow'), 1000);
-    //console.log("It's a tie");
 }
 
 function game(userChoice)
 {
     if (userScore == 5 || compScore == 5) return openModal(userScore, compScore);
-    //console.log("You chose: " + userChoice);
     const computerChoice = getComputerChoice();
-    //console.log(`User choice =>  ${userChoice}`);
-    //console.log(`Computer choice => ${computerChoice}`);
     switch(userChoice + computerChoice)
     {
         case "pr":
-            //console.log("You Win: Paper covers rock");
         case "rs":
-            //console.log("You win: Rock crushes scissors");
         case "sp":
-            //console.log("You win: Scissors cut paper");
             win(userChoice, computerChoice);
             userScore++;
             userScore_span.textContent = userScore;
             break;
         case "rp":
-            //console.log("You lose: Paper covers rock");
         case "sr":
-            //console.log("You lose: Rock crushes scissors");
         case "ps":
-            //console.log("You lose: Scissors cut paper");
             lose(userChoice, computerChoice);
             compScore++;
             compScore_span.textContent = compScore;
@@ -135,11 +109,9 @@ function game(userChoice)
         case "pp":
         case "rr":
         case "ss":
-            //console.log("It's a tie");
             draw(userChoice);
             break;
     }
-    // finalScore = userScore + compScore;
     if (userScore == 5 || compScore == 5) return openModal(userScore, compScore);
 }
 
@@ -153,12 +125,12 @@ function openModal(uScore, cScore){
     }
 }
 
+//Restart Game Functionality
 restartButton.addEventListener('click', restartGame);
 
 function restartGame() {
     compScore = 0;
     userScore = 0;
-    // finalScore = 0;
     modal.style.display = 'none';
     result_div.textContent = 'Select an icon to play';
     userScore_span.textContent = 0;
