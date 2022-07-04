@@ -1,6 +1,6 @@
 let userScore = 0;
 let compScore = 0;
-let finalScore = 0;
+// let finalScore = 0;
 
 
 const userScore_span = document.getElementById('user-score');
@@ -12,6 +12,7 @@ const paper_div = document.getElementById('p');
 const scissors_div = document.getElementById('s');
 const modal = document.getElementById('myModal');
 const endGameMessage = document.querySelector('.message');
+const restartButton = document.querySelector('.restartBtn');
 
 
 function main() {
@@ -104,8 +105,7 @@ function draw(userChoice)
 
 function game(userChoice)
 {
-    console.log(finalScore);
-    if (finalScore == 5) return openModal(userScore, compScore);
+    if (userScore == 5 || compScore == 5) return openModal(userScore, compScore);
     //console.log("You chose: " + userChoice);
     const computerChoice = getComputerChoice();
     //console.log(`User choice =>  ${userChoice}`);
@@ -139,8 +139,8 @@ function game(userChoice)
             draw(userChoice);
             break;
     }
-    finalScore = userScore + compScore;
-    console.log(finalScore);
+    // finalScore = userScore + compScore;
+    if (userScore == 5 || compScore == 5) return openModal(userScore, compScore);
 }
 
 function openModal(uScore, cScore){
@@ -152,6 +152,19 @@ function openModal(uScore, cScore){
         endGameMessage.textContent = 'Sorry you lost ...';
     }
 }
+
+restartButton.addEventListener('click', restartGame);
+
+function restartGame() {
+    compScore = 0;
+    userScore = 0;
+    // finalScore = 0;
+    modal.style.display = 'none';
+    result_div.textContent = 'Select an icon to play';
+    userScore_span.textContent = 0;
+    compScore_span.textContent = 0;
+}
+
 
   // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
